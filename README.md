@@ -4,7 +4,7 @@
 
 Sending metrics in the socket (Brubeck, Graphite, etc.) from pl/pgsql code.
 
-If a sending is executed inside a transaction, the metrics will are delivered even if the transaction is aborted.
+If a sending is executed inside a transaction, the metrics will delivered even if the transaction is aborted.
 
 ### INSTALLATION
 

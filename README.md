@@ -32,7 +32,7 @@ create extension pg_metricus schema metricus;
 
 For Brubeck:
 ```plpgsql
-select metricus.send_metric(format('%s.%s:%s|%s', 
+select metricus.send_metric(format(E'%s.%s:%s|%s\n', 
     metric_path, 
     metric_name, 
     metric_value, 
@@ -66,7 +66,7 @@ begin
 
 	x2 = clock_timestamp();
 
-	perform metricus.send_metric(format('%s.%s:%s|%s', 
+	perform metricus.send_metric(format(E'%s.%s:%s|%s\n', 
         'db.sql.metric', 
         'get_val_hstore_duration', 
         extract(millisecond from (x2 - x1))::bigint::text, 

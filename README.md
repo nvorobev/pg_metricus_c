@@ -2,7 +2,7 @@
 
 ### INFO
 
-pg_metricus is an extension for sending metrics in the socket (Brubeck aggregator, Graphite, etc.) from pl/pgsql code.
+pg_metricus is an extension written in C for sending metrics in the socket (Brubeck aggregator, Graphite, etc.) from pl/pgsql code.
 
 If a sending is executed inside a transaction, the metrics will delivered even if the transaction is aborted.
 

@@ -28,9 +28,9 @@ create schema metricus;
 create extension pg_metricus schema metricus;
 ```
 
-### EXAMPLE
+### FORMAT
 
-Format for Brubeck:
+For Brubeck:
 ```plpgsql
 select metricus.send_metric(format('%s.%s:%s|%s', 
     metric_path, 
@@ -40,7 +40,7 @@ select metricus.send_metric(format('%s.%s:%s|%s',
 ));
 ```
 
-Format for Graphite:
+For Graphite:
 ```plpgsql
 select metricus.send_metric(format(E'%s.%s %s %s \n', 
     metric_path, 
@@ -48,4 +48,30 @@ select metricus.send_metric(format(E'%s.%s %s %s \n',
     metric_value, 
     extract(epoch from now())::integer
 ));
+```
+
+### EXAMPLE
+
+```plpgsql
+do language plpgsql $$
+declare
+	x1 timestamp;
+	x2 timestamp;
+begin
+
+	x1 = clock_timestamp();
+
+	select * into v_val_hstore from get_val_hstore(i_params);
+
+	x2 = clock_timestamp();
+
+	perform metricus.send_metric(format('%s.%s:%s|%s', 
+        'db.sql.metric', 
+        'get_val_hstore_duration', 
+        extract(millisecond from (x2 - x1))::bigint::text, 
+        'ms'
+    ));
+
+end
+$$;
 ```

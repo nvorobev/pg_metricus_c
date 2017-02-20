@@ -4,6 +4,11 @@
 #include <arpa/inet.h>
 #include <unistd.h>
 
+#if PG_VERSION_NUM >= 90600
+/* GetConfigOptionByName has a new signature from 9.6 on */
+#define GetConfigOptionByName(name, varname) GetConfigOptionByName(name, varname, false)
+#endif  /* PG_VERSION_NUM */
+
 #ifdef PG_MODULE_MAGIC
 PG_MODULE_MAGIC;
 #endif

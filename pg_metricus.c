@@ -8,7 +8,8 @@
 PG_MODULE_MAGIC;
 #endif
 
-char *dup_pgtext(text *what)
+char *
+dup_pgtext(text *what)
 {
     size_t len = VARSIZE(what)-VARHDRSZ;
     char *dup = palloc(len+1);

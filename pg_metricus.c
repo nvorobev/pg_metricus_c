@@ -5,12 +5,8 @@
 #include <unistd.h>
 
 #ifdef PG_MODULE_MAGIC
-    PG_MODULE_MAGIC;
+PG_MODULE_MAGIC;
 #endif
-
-PG_FUNCTION_INFO_V1(send_metric);
-
-char *dup_pgtext(text *);
 
 char *dup_pgtext(text *what)
 {
@@ -21,8 +17,7 @@ char *dup_pgtext(text *what)
     return dup;
 }
 
-Datum
-send_metric(PG_FUNCTION_ARGS);
+PG_FUNCTION_INFO_V1(send_metric);
 
 Datum
 send_metric(PG_FUNCTION_ARGS)

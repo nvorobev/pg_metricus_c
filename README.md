@@ -57,11 +57,12 @@ do language plpgsql $$
 declare
 	x1 timestamp;
 	x2 timestamp;
+	v_val_hstore text;
 begin
 
 	x1 = clock_timestamp();
 
-	select * into v_val_hstore from get_val_hstore(i_params);
+	v_val_hstore = get_val_hstore();
 
 	x2 = clock_timestamp();
 

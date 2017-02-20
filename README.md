@@ -1,8 +1,8 @@
-# PG Metricus (pg_metricus)
+# PG Metricus
 
 ### INFO
 
-Sending metrics in the socket (Brubeck, Graphite, etc.) from pl/pgsql code.
+pg_metricus is an extension for sending metrics in the socket (Brubeck aggregator, Graphite, etc.) from pl/pgsql code.
 
 If a sending is executed inside a transaction, the metrics will delivered even if the transaction is aborted.
 
@@ -32,7 +32,7 @@ create extension pg_metricus schema metricus;
 
 ### FORMAT
 
-For Brubeck:
+For Brubeck aggregator:
 ```plpgsql
 select metricus.send_metric(format(E'%s.%s:%s|%s\n', 
     metric_path, 

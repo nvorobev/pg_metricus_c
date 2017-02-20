@@ -27,10 +27,8 @@ send_metric(PG_FUNCTION_ARGS);
 Datum
 send_metric(PG_FUNCTION_ARGS)
 {
-    int sockfd;
-    char *message;
-    char *host;
-    int32 port;
+    int sockfd, port;
+    char *message, *host;
     struct sockaddr_in serv_addr;
 
     if (PG_ARGISNULL(0))

@@ -13,17 +13,10 @@
 PG_MODULE_MAGIC;
 #endif
 
-PG_FUNCTION_INFO_V1(send_metric);
+char *dup_pgtext(text *what);
+extern Datum send_metric(PG_FUNCTION_ARGS);
 
-char *
-dup_pgtext(text *what)
-{
-    size_t len = VARSIZE(what)-VARHDRSZ;
-    char *dup = palloc(len+1);
-    memcpy(dup, VARDATA(what), len);
-    dup[len] = 0;
-    return dup;
-}
+PG_FUNCTION_INFO_V1(send_metric);
 
 Datum
 send_metric(PG_FUNCTION_ARGS)
@@ -63,4 +56,14 @@ send_metric(PG_FUNCTION_ARGS)
     close(sockfd);
 
     PG_RETURN_VOID();
+}
+
+char *
+dup_pgtext(text *what)
+{
+    size_t len = VARSIZE(what)-VARHDRSZ;
+    char *dup = palloc(len+1);
+    memcpy(dup, VARDATA(what), len);
+    dup[len] = 0;
+    return dup;
 }
